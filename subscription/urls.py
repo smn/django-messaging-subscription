@@ -6,20 +6,20 @@ from subscription import api
 
 admin.autodiscover()
 
-# Setting the API base name and registering the API resources using
+# Setting the API base name and registering the API Peoples using
 # Tastypies API function
-api_resources = Api(api_name='v1')
-api_resources.register(api.SubscriptionResource())
-api_resources.register(api.PeriodicTaskResource())
-api_resources.register(api.MessageSetResource())
+api_Peoples = Api(api_name='v1')
+api_Peoples.register(api.SubscriptionPeople())
+api_Peoples.register(api.PeriodicTaskPeople())
+api_Peoples.register(api.MessageSetPeople())
 
 
-api_resources.prepend_urls()
+api_Peoples.prepend_urls()
 
 # Setting the urlpatterns to hook into the api urls
 urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
-                       url(r'^api/', include(api_resources.urls)),
+                       url(r'^api/', include(api_Peoples.urls)),
                        url(r'^admin/subscription/upload/',
                            'subscription.views.uploader',
                            {'page_name': 'csv_uploader'}, name="csv_uploader"),

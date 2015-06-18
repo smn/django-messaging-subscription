@@ -1,7 +1,7 @@
 """
 Tests for Subscription Application
 """
-from tastypie.test import ResourceTestCase
+from tastypie.test import PeopleTestCase
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -18,11 +18,11 @@ import json
 import logging
 
 
-class SubscriptionResourceTest(ResourceTestCase):
+class SubscriptionPeopleTest(PeopleTestCase):
     fixtures = ["test"]
 
     def setUp(self):
-        super(SubscriptionResourceTest, self).setUp()
+        super(SubscriptionPeopleTest, self).setUp()
 
         # Create a user.
         self.username = 'testuser'
@@ -65,7 +65,7 @@ class SubscriptionResourceTest(ResourceTestCase):
             "lang": "en",
             "message_set": "/api/v1/message_set/3/",
             "next_sequence_number": 1,
-            "resource_uri": "/api/v1/subscription/1/",
+            "People_uri": "/api/v1/subscription/1/",
             "schedule": "/api/v1/periodic_task/1/",
             "to_addr": "+271234",
             "user_account": "80493284823"
@@ -96,7 +96,7 @@ class SubscriptionResourceTest(ResourceTestCase):
             "lang": "en",
             "message_set": "/api/v1/message_set/3/",
             "next_sequence_number": 1,
-            "resource_uri": "/api/v1/subscription/1/",
+            "People_uri": "/api/v1/subscription/1/",
             "schedule": "/api/v1/periodic_task/1/",
             "to_addr": "+271234",
             "user_account": "80493284823"
@@ -131,7 +131,7 @@ class SubscriptionResourceTest(ResourceTestCase):
             "contact_key": "82309423098",
             "lang": "en",
             "next_sequence_number": 1,
-            "resource_uri": "/api/v1/subscription/1/",
+            "People_uri": "/api/v1/subscription/1/",
             "schedule": "/api/v1/periodic_task/10/",  # Non existent task
             "to_addr": "+271234",
             "user_account": "80493284823"
@@ -142,7 +142,7 @@ class SubscriptionResourceTest(ResourceTestCase):
                                         data=data)
         json_item = json.loads(response.content)
         self.assertHttpBadRequest(response)
-        self.assertEqual("Could not find the provided object via resource URI "
+        self.assertEqual("Could not find the provided object via People URI "
                          "'/api/v1/periodic_task/10/'.", json_item["error"])
 
     def test_post_subscription_good(self):
@@ -151,7 +151,7 @@ class SubscriptionResourceTest(ResourceTestCase):
             "lang": "en",
             "message_set": "/api/v1/message_set/3/",
             "next_sequence_number": 1,
-            "resource_uri": "/api/v1/subscription/1/",
+            "People_uri": "/api/v1/subscription/1/",
             "schedule": "/api/v1/periodic_task/1/",
             "to_addr": "+271234",
             "user_account": "80493284823"
